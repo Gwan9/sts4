@@ -1,0 +1,9 @@
+server:
+  port: 8070
+
+spring:
+  h2:
+    console:
+      enabled: true
+
+      

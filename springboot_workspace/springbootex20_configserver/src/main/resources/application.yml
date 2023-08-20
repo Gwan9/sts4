@@ -1,0 +1,81 @@
+server:
+  port: 8081
+  
+spring:
+  cloud:
+    config:
+      server:
+        git:
+          uri: git@github.com:Gwan9/cloudconig.git
+          default-label: main
+          ignore-local-ssh-settings: true
+          private-key: |
+            -----BEGIN RSA PRIVATE KEY-----
+            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
+            -----END RSA PRIVATE KEY-----
+        encrypt:
+          enabled: false
+#actuator 설정 : 마이크로 서비스의 상태 확인용
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    shutdown:
+      enabled: true
+    health:
+      show-details: always
+      
+encrypt:
+  key: keykeykey
+      
+      

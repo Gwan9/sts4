@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  
+  <mapper namespace="kr.co.jhta.springboot12.dao.MemberDAO">
+  	<select id="getMemberByEmail" parameterType="String" resultType="MemberDTO">
+  	
+  		SELECT *
+  		FROM member
+  		WHERE email = #{email}
+  	</select>
+  	
+  	<insert id="insertOne" parameterType="MemberDTO">
+		insert into member (no, id, pw,name, email, enabled)
+		values (member_no_seq.nextval,#{id},#{pw},#{name},#{email},1)
+  	</insert>
+  	
+  	<insert id="addRole" parameterType="String">
+		insert into member_role
+		values (#{id},'ROLE_USER')
+  	</insert>
+  </mapper>

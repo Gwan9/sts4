@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="kr.co.jhta.springboot12.dao.BoardDAO">
+  
+  	<select id="getAll" resultType="boardDTO" parameterType="StartEnd">
+	  	SELECT RN, bno, bno, writer, title, contents, regdate, hits, ip, status
+	  	FROM (SELECT ROWNUM RN , bno, writer, title, contents, regdate, hits, ip, status
+	  		FROM (select bno, writer, title, contents, regdate, hits, ip, status 
+	  				FROM board  
+	  				ORDER BY bno DESC)
+      		WHERE 	ROWNUM &lt; = #{endNo})
+     	WHERE RN &gt; = #{startNo}
+  	
+  	</select>
+  	
+  	<select id="selectOne" parameterType="int" resultType="boardDTO">
+  		SELECT *
+  		FROM board
+  		WHERE bno = #{bno}
+  	
+  	</select>
+  	
+  	<update id="modifyOne" parameterType="boardDTO">
+  		UPDATE board
+		SET title = #{title}, contents = #{contents} 
+		WHERE bno = #{bno}
+	</update>
+	
+	<insert id="addOne" parameterType="boardDTO">
+		INSERT INTO board (bno, writer, title, contents, regdate,hits, ip, status)
+  		VALUES (BOARD_BNO_SEQ.nextval, #{writer}, #{title}, #{contents}, sysdate, 0, #{ip}, 1)
+	</insert>
+	
+	<delete id="removeOne" parameterType="int">
+		DELETE FROM board
+	 	WHERE bno=#{bno}
+	</delete>
+	
+	<select id="getTotal" resultType="int">
+		SELECT count(*) cnt 
+  		FROM board
+	</select>
+  </mapper>
